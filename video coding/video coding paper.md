@@ -54,7 +54,7 @@ RD model，量化参数，量化步长，buffer
 	迭代两次，第一次，设定QP，根据MB信息得到最优CM,RC，然后根据CM,RC更新QP，两次的RD cost比较，如果后者高，根据阈值选定部分MB再次更新QP
 
 #SVC中取舍STAR组合问题，rate和perceptual quality模型构建
-modeling of rate and perceptual quality of compressed video as functions of frame rate and quantization stepsize and its applications
+modeling of rate and perceptual quality of compressed video as functions of frame rate and quantization stepsize and its applications   
 
 ##场景，问题，对象，变量，约束
 具体编码过程，输出码率bit rate受几个因素影响：
@@ -102,3 +102,79 @@ quality：scalable
 	加入SR因素
 	验证quality在nonscalable下的实用性
 	对不稳定序列，使用滑动窗口或scene change detection改进内容变化场景下的取舍
+
+
+#二次多项式RD model的视频编码
+a new rate control scheme using quadratic rate distortion model--CSVT1997
+##场景，问题，对象，变量，约束
+
+已知变量R，D，建模，求参，用模型编码
+
+D:使用一帧的平均量化尺度（average quantization scale）
+
+二次模型参数，最小二乘法
+
+##贡献
+模型，高斯展开，得到二次
+
+假设：输出码率恒定
+
+bit allocation scheme：
+
+	两个假设： I，P，B量化参数的尺度比例为定值--distortion，相同类型间类似，不同类型间比例固定，未考虑场景变化
+	一个等于： 总码率*总图片数=总bits==剩余bits
+	三个码率： 依据先前模型，计算I,P,B三种帧的码率，具体求解顺序有区别
+
+##结果指标
+
+	PSNR
+	bit rate fluctuation
+
+#log关系的frame-level RD-model视频编码
+a rate-quantization model for mpeg encoders--ICIP1997
+##场景，问题，对象，变量，约束
+
+RD建模，求解，log关系
+
+frame-level
+
+
+##假设
+
+序列中，所有图片量化矩阵固定
+
+##贡献
+
+##指标
+
+	PSNR
+	mismatch ratio：输出bit rate和目标bit rate间关系
+
+
+#基于小波变换，适应JPEG2000的MC编码模型
+A model-based motion compensated video coder with JPEG2000 compatibility--ICIP2004
+##场景，问题，对象，变量，约束
+
+可伸缩，扩展视频编码
+
+常规视频编码，基于
+
+	运动补偿
+	DCT
+
+用小波变换替代
+
+可行性：
+
+	已经应用到静态图片编码，性能优于DCT
+	对伸缩性的支持
+	效率被证明和DCT视频编码类似--motion compensated lifting approach
+
+##贡献
+。。。
+
+#低延时通讯中
+rate control in dct video coding for low-delay communications--CSVT1999
+##场景，问题，对象，变量，约束
+
+ 
