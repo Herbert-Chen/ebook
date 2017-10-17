@@ -130,6 +130,8 @@ bit allocation scheme：
 	PSNR
 	bit rate fluctuation
 
+
+
 #log关系的frame-level RD-model视频编码
 a rate-quantization model for mpeg encoders--ICIP1997
 ##场景，问题，对象，变量，约束
@@ -149,6 +151,8 @@ frame-level
 
 	PSNR
 	mismatch ratio：输出bit rate和目标bit rate间关系
+
+
 
 
 #基于小波变换，适应JPEG2000的MC编码模型
@@ -173,8 +177,107 @@ A model-based motion compensated video coder with JPEG2000 compatibility--ICIP20
 ##贡献
 。。。
 
-#低延时通讯中
+
+
+#低延时通讯中DCT编码器改进
 rate control in dct video coding for low-delay communications--CSVT1999
 ##场景，问题，对象，变量，约束
 
- 
+低延迟实时通讯中的问题：
+bit rate高，延迟，delay，不连续
+bit rate低，带宽浪费
+
+当前方法及问题：
+
+初始化后多次优化：
+	
+	计算复杂 computational complexity
+依据公式选择：	
+	
+	基于对剩余bits，buffer的使用率，块中像素值方差等的建模
+	不能严格满足bit约束条件
+	常用于高buffer延迟中，在低延迟应用中会导致 过多skip 和 浪费带宽
+
+
+##贡献
+优化方向：
+
+	减少skip的次数，满足bit rate要求，更准确模型
+	运动补偿中，建立D(B)模型，当前总大小下的distortion
+		量化参数：B，运动补偿块中的像素值方差，部分rate-model的参数
+
+##结论：
+减小运动补偿帧的MSE，
+
+	bit rate由高到低，QP的stepsize由小变大
+
+
+
+
+#视觉跟踪数据集的构建
+Eye-tracking database for a set of standard video sequences
+
+##场景，问题，对象，变量，约束
+
+定位：
+
+	显著性模型质量评价的工具
+
+对象变量：
+
+视频
+	
+	内容
+	帧率
+	总帧数
+	YUV
+	分辨率
+
+人的视线移动
+
+	多个人
+	每个人多次--两次
+
+##实验过程
+
+
+
+##结果分析
+
+看两次视频，移动轨迹是否不一样？--一致性，多次重复
+
+	是，通过每帧上，两次视觉停留点的欧氏距离来度量
+		单纯解释存在，不建模
+	特别显著序列与不显著序列：
+		多个对象比单个对象显著
+		单个对象中，大对象比小对象显著
+
+		
+常见模型准确性：
+
+IKN, IB
+
+假设：
+两模型的分数分布有相同的均值
+
+
+score=像素点显著值*高斯权重(模仿2`视角)，整图求和，所有人求和
+像素点显著值，在整个视频序列上做归一化
+
+t检验
+
+	IKN和IB效果不一样？
+		是的！
+		除了一种情况，其他情况IKN性能优于IB(city)
+
+	不同模型适合特定某次观看？
+		否！两个模型对第几次看不敏感
+
+	运用绝对准确判断模型准确性(去量化，二值化)
+		是否比saliency均匀分布效果好？(score高)--情况：视频序列
+			IKN:两次观看中，一种情况差，其余情况好
+			IB:第一次观看一种情况差，第二次观看两种情况类似
+
+			特殊情况：city
+				目标：唯一，规模大，颜色文理分布与背景相似，镜头移动过程中相对背景静止
+

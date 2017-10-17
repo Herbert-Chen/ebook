@@ -1,4 +1,137 @@
 #TEX
+##基本要素
+###作者，书本设计者，排版者
+###布局设计
+
+##输入元素
+###空格
+
+多个空格视为一个
+开头空格省略
+换行符视为空格
+
+空格组成空行
+空行表示另起一段
+多个空行等于一个空行
+
+###特殊字符
+
+\# $ % ^ _ { } ~ \
+
+转义！
+表示原义：加\，\需用\textbackslash--\\\\用来换行
+
+###命令
+
+3种情况
+
+    \加上若干52种字母，以空格数字或其他非字母结束
+    \加上1个非字符
+    命令后加*
+
+所有情况，后面的空格都会被忽略
+
+    如果需要加空格：
+        {}
+        \space
+
+\command[optional parameter]{parameter
+
+
+###注释
+
+单行注释--%，当前行后续都不会被处理
+分块注释--不可被其他环境包含
+
+    \begin{comment}
+    \end{comment}
+
+##文章格式
+
+###文章类型
+
+    \documentclass[option]{class}
+    class
+        article
+        proc--proceedings based on article
+        minimal
+        report
+        book
+        slides
+
+    option
+        10pt，11pt,12pt
+        a4paper,letterpaper
+        fleqn--formulae left-aligned instead of centred
+        leqno--方程编号靠左不靠右
+        titlepage,notitlepage--new page start after title or not
+        onecolumn,twocolumn
+        twoside,oneside
+        landscape
+        openright,openany
+
+
+###导言区
+
+包
+
+    \usepackage{...}
+
+作者
+
+    \author{}
+
+标题
+
+    \title{}---正文开始后\makefile
+###正文
+
+    \begin{document}
+    \end{document}
+
+page style
+
+    \pagestyle{style}
+        plain--最下方正中间打印页码
+        headings--在页眉打印
+        empty--不显示
+
+    \thispagestyle{}--临时改变
+
+##常见格式
+
+
+##大项目：
+
+    导入
+        \include{filename}--不需要后缀，新起一页来插入内容
+        \input{}--不新起一页
+        \includeonly{filename1,filename2...}
+
+\usepackage{syntonly}???
+\syntaxonly
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ##目的
 
